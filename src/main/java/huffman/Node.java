@@ -1,1 +1,43 @@
- 
+package main.java.huffman;
+
+public class Node implements Comparable<Node>{
+
+    private char character;
+    private int frequency;
+    private Node left, right;
+
+    public Node(char character, int frequency){
+        this.character = character;
+        this.frequency = frequency;
+        this.left = null;
+        this.right = null;
+    }
+
+    public Node(int frequency, Node left, Node right){
+        this.frequency = frequency;
+        this.left = left;
+        this.right = right;
+    }
+    @Override
+    public int compareTo(Node other) {
+        return Integer.compare(this.frequency, other.frequency);
+
+//        alternate way below which avoids overflow for very large frequencies
+//        but unlikely we will get a very large frequency
+//        if (n.freq < this.freq) {
+//            return 1;
+//        } else if (n.freq > this.freq) {
+//            return -1;
+//        } else {
+//            return 0;
+//        }
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "character=" + character +
+                ", frequency=" + frequency +
+                '}';
+    }
+}
