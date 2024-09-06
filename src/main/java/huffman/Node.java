@@ -2,9 +2,9 @@ package main.java.huffman;
 
 public class Node implements Comparable<Node>{
 
-    public char character;
-    public int frequency;
-    public Node left, right;
+    char character;
+    int frequency;
+    Node left, right;
 
     public Node(char character, int frequency){
         this.character = character;
