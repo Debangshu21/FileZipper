@@ -10,11 +10,11 @@ import java.io.IOException;
 public class HuffmanTree {
     private Node root;
 
-    public Node buildTree(Map<Character, Integer> frequencyMap) {
-        PriorityQueue<Node> minHeap = new PriorityQueue<>();
+    public Node buildTree(Map<Byte, Integer> frequencyMap) {
+        PriorityQueue<Node> minHeap = new PriorityQueue<>((a, b) -> a.frequency - b.frequency);
 
-        Set<Map.Entry<Character, Integer>> entrySet = frequencyMap.entrySet();
-        for (Map.Entry<Character, Integer> entry : entrySet) {
+        Set<Map.Entry<Byte, Integer>> entrySet = frequencyMap.entrySet();
+        for (Map.Entry<Byte, Integer> entry : entrySet) {
             Node node = new Node(entry.getKey(), entry.getValue());
             minHeap.add(node);
         }
@@ -22,13 +22,13 @@ public class HuffmanTree {
         while (minHeap.size() > 1) {
             Node first = minHeap.poll();    
             Node second = minHeap.poll();
-            Node newNode = new Node('\0', first.frequency + second.frequency);
+            Node newNode = new Node((byte) 0, first.frequency + second.frequency);
             newNode.left = first;
             newNode.right = second;
             minHeap.add(newNode);
         }
 
-        root = minHeap.poll();  
+        root = minHeap.poll();
         return root;
     }
 
@@ -39,7 +39,7 @@ public class HuffmanTree {
 
         if (node.left == null && node.right == null) {
             out.writeBoolean(true);  
-            out.writeChar(node.character); 
+            out.writeByte(node.character);
         } else {
             out.writeBoolean(false); 
             serialize(node.left, out);  
@@ -52,8 +52,8 @@ public class HuffmanTree {
 
         if (isLeaf) {
             
-            char character = in.readChar();
-            return new Node(character, 0); 
+            byte character = in.readByte();
+            return new Node((byte) character, 0);
         } else {
             
             Node left = deserialize(in);
