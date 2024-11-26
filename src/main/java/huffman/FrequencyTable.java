@@ -11,7 +11,7 @@ public class FrequencyTable {
 
     public FrequencyTable(String filepath) throws IOException {
         freqmap = new HashMap<>();
-        countFrequencies(filepath);
+        countFrequencies(filepath); 
     }
 
     private void countFrequencies(String filepath) throws IOException {
